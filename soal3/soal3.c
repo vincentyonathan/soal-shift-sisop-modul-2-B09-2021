@@ -10,8 +10,11 @@
 #include <time.h>
 #include <wait.h>
 
-int main() 
+int main(int argc, char *argv[]) 
 {
+  //3d
+  
+
   pid_t pid, sid;
   int status;
   pid = fork(); 
@@ -37,6 +40,7 @@ int main()
 
   while (1) 
   {
+    //3a
     pid_t pid2;
     int status,status2,status3;
     pid2 = fork();
@@ -73,7 +77,7 @@ int main()
             strcat(sizelink, ukuran);
 
             char dir[100];
-            strcat(dir , timenow2);
+            strcpy(dir , timenow2);
 
             char *arguments[] = {"wget", "-q", "-O", dir, sizelink ,NULL};
             execv("/usr/bin/wget", arguments);
@@ -85,18 +89,35 @@ int main()
           char encryp[50] = "Download Success";
           int sizet = strlen(encryp);
           int z;
-          for(z=1 ; z<=sizet; z++)
+          for(z=0 ; z<sizet; z++)
           {
             if(encryp[z] == ' ')
             {
               continue;
             }
-            else if(encryp[z] <= 'a' && encryp[z] >= 'z' && encryp[z]+ 5 > 'z' || encryp[z] <= 'A'  && encryp[z] >= 'Z' && encryp[z] +5 > 'Z' )
+            else if(encryp[z] >='a' && encryp[z] <= 'z')
             {
-              encryp[z] -= 26; // Kembali dalam batasan ASCII huruf
-            } // agar tetap dalam batasan ASCI huruf
-            encryp[z] += 5;
+              encryp[z] += 5;
+              if (encryp[z] > 'z')
+              {
+                encryp[z] = encryp[z] - 'z' + 'a' - 1;
+              }
+            }
+
+            else if (encryp[z] >='A' && encryp[z] <= 'Z')
+            {
+              encryp[z] += 5;
+              if (encryp[z] + 5 > 'Z')
+              {
+                if (encryp[z] > 'Z')
+                {
+                  encryp[z] = encryp[z] - 'Z' + 'A' - 1;
+                }
+              }
+            }
+            
           }
+          //3c
           pid3 = fork();
           chdir(".."); //balik ke direktori sebelumnya
           if (pid3 == 0 )
