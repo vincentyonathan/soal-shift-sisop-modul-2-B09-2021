@@ -12,9 +12,44 @@
 
 int main(int argc, char *argv[]) 
 {
-  //3d
+  //3e
+  if (argc != 2)
+  {
+    printf("No Command\n");
+    exit(EXIT_FAILURE);
+  }
   
+  else if (argc > 2)
+  {
+    printf("Too much command\n");
+    exit(EXIT_FAILURE);
+  }
 
+  else if(argv[1][1]=='z')
+  {
+    //3d --> bash Killer.sh
+    char newdir[50] = "/home/prk/praktikum2/Killer.sh";
+    FILE* killer = fopen(newdir, "w");
+    fprintf(killer , "#!/bin/bash\nkillall ./soal3\n");
+    fclose(killer);
+  }
+
+  else if(argv[1][1]=='x')
+  {
+    //3d --> bash Killer.sh
+    char newdir[50] = "/home/prk/praktikum2/Killer.sh";
+    FILE* killer = fopen(newdir, "w");
+    fprintf(killer , "#!/bin/bash\nkill %d\n",getpid()+1); //pas di main anggap 10, pas fork pertama 11, yang ingin dimatikan yang 11
+    fclose(killer);
+  }
+
+  else
+  {
+    printf("No such command listed\n");
+    exit(EXIT_FAILURE);
+  }
+  
+  
   pid_t pid, sid;
   int status;
   pid = fork(); 
@@ -42,7 +77,7 @@ int main(int argc, char *argv[])
   {
     //3a
     pid_t pid2;
-    int status,status2,status3;
+    int status,status2,status3,stats;
     pid2 = fork();
     char timenow[50];
     time_t times = time(NULL);
@@ -54,7 +89,10 @@ int main(int argc, char *argv[])
         execv ("/usr/bin/mkdir", argv);
      }
      
-     else 
+     pid_t temp;
+     while ((wait(&stats)) > 0);
+     temp = fork();
+     if(temp == 0)
      {
        pid_t pid5;
        while ((wait(&status)) > 0); //agar menunggu folder jadi terlebuh dahulu
@@ -139,13 +177,12 @@ int main(int argc, char *argv[])
           }
           pid_t pid4;
           while ((wait(&status3)) > 0); //agar menunggu folder jadi terlebuh dahulu
-          pid4 = fork();
-
-          if (pid4 == 0)
-          {
+          //pid4 = fork();
+          // if (pid4 == 0)
+          // {
             char *arg[] = {"rm", "-r",timenow, NULL};
             execv("/usr/bin/rm", arg);
-          }
+          // }
       }
      sleep(40);
   }
