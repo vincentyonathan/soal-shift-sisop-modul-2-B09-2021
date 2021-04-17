@@ -255,6 +255,55 @@ int pre_birthday_time(int day, int month){
 
     return b_month == month && b_day == day;
 }
+
+void h_6_birthday(){
+    do_download_foto();
+    do_download_film();
+    do_download_musik();
+    do_download_foto();
+    do_download_film();
+    do_download_musik();
+    do_unzip_foto();
+    do_unzip_film();
+    do_unzip_musik();
+    do_move_foto();
+    do_move_film();
+    do_move_musik();
+}
+void Daemon(){
+    pid_t pid;
+    const unsigned sleep_time = 1;
+    const int b_month = 3;
+    const int b_day = 9;
+    const int b_hour = 22;
+    const int b_min = 22;
+    while(1)
+    {
+        time_t now=time(NULL);
+        struct tm *timenow=localtime(&now);
+        if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
+        itsbirthday(pid, status);
+        else if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
+        h_6_birthday(pid);
+        while(wait(status)>0);
+        sleep(sleep_interval);
+    }
+} if ()
+//end of 1e
+
+//start of 1f
+void remove_folder(void){
+    pid_t pid = fork();
+    if (pid == 0){
+        rename_fotopyoto();
+        rename_musikmusyik();
+        rename_filmfylm();
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }    
+}
 void zipping_folder(void){
     pid_t pid = fork();
     if (pid == 0){
@@ -272,45 +321,38 @@ void zipping_folder(void){
         int status;
         waitpid(pid, &status, 0);
     }    
-}
-
-void Daemon(){
-    pid_t child_id;
-    const unsigned Sleep_time = 1;
-    char *Folder_name[] = {"Fylm","Musyik","Pyoto"}
-
-
-
-
-}
-//end of 1e
-
-//start of 1f
-void remove_folder(void){
+} 
+void itsbirthday(void){
     pid_t pid = fork();
     if (pid == 0){
-        rename_fotopyoto();
-        rename_musikmusyik();
-        rename_filmfylm();
+        zipping_folder();
+        remove_folder();
     }
     else {
         int status;
         waitpid(pid, &status, 0);
     }    
-}
-void after_birthday(void){
-
-}        
+}   
+}      
 //end of 1f
 
 // ||---command list---||
 //1a do_makedir_foto/film/musik (create folder)
 //1b do_download_foto/film/musik (download link)
-//1c do_unzip_ (unzip zip)
+//1c do_unzip_foto/film/musik (unzip zip)
 //1d do_move (move from x to y)
 //1e Daemon (for function without time check use "zipping_folder")
 //1f remove_folder
 int main(void) {
+    pid_t pid, sid;
+    int status;
+    if((pid = fork()) > 0)
+        exit(EXIT_SUCCESS);
+    umask(0);
+    sid = setsid();
+    if (sid < 0 || chdir(workingDir))
+        exit(EXIT_FAILURE);
 
+    Daemon(&status);
     return 0;
 }
