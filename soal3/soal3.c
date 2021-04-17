@@ -52,13 +52,15 @@ int main()
      
      else 
      {
+       pid_t pid5;
        while ((wait(&status)) > 0); //agar menunggu folder jadi terlebuh dahulu
        chdir(timenow);
      	//3b
-     	int i;
-        for (i = 1 ; i < 11 ; i ++, sleep(5)) //**
+     	  int i;
+        for (i = 1 ; i < 11 ; i ++, sleep(5)) 
         {
-          if (fork() == 0)
+          pid5 = fork();
+          if (pid5 == 0)
           {
             char timenow2[50];
             time_t epoch = time(NULL);
@@ -89,7 +91,7 @@ int main()
             {
               continue;
             }
-            if(encryp[z] >= 'a' && encryp[z] <= 'z' && encryp[z]+ 5 > 'z' || encryp[z] >= 'A'  && encryp[z] <= 'Z' && encryp[z] +5 < 'Z' )
+            else if(encryp[z] <= 'a' && encryp[z] >= 'z' && encryp[z]+ 5 > 'z' || encryp[z] <= 'A'  && encryp[z] >= 'Z' && encryp[z] +5 > 'Z' )
             {
               encryp[z] -= 26; // Kembali dalam batasan ASCII huruf
             } // agar tetap dalam batasan ASCI huruf
