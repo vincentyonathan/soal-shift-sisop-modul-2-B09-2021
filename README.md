@@ -237,3 +237,5 @@ menghapus folder awal :
 ### 3. d)
 *Praktikan* diminta membuat program tersebut akan men-generate sebuah program “Killer” yang executable, dimana program tersebut akan menterminasi semua proses program yang sedang berjalan dan akan menghapus dirinya sendiri setelah program dijalankan menggunakan program bash.
 
+#### Source Code :
+
