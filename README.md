@@ -135,6 +135,71 @@ Tahap Soal :
 Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat sebuah file “status.txt”, dimana didalamnya berisi pesan “Download Success” yang terenkripsi dengan teknik Caesar Cipher dan dengan shift 5. Caesar Cipher adalah Teknik enkripsi sederhana yang dimana dapat melakukan enkripsi string sesuai dengan shift/key yang kita tentukan. Misal huruf “A” akan dienkripsi dengan shift 4 maka akan menjadi “E”. Karena Ranora orangnya perfeksionis dan rapi, dia ingin setelah file tersebut dibuat, direktori akan di zip dan direktori akan didelete, sehingga menyisakan hanya file zip saja.
 
 #### Source Code :
+```c
+ pid_t pid3;
+          while ((wait(&status2)) > 0); //agar menunggu folder jadi terlebuh dahulu
+          char target[50];
+          char encryp[50] = "Download Success";
+          int sizet = strlen(encryp);
+          int z;
+          for(z=0 ; z<sizet; z++)
+          {
+            if(encryp[z] == ' ')
+            {
+              continue;
+            }
+            else if(encryp[z] >='a' && encryp[z] <= 'z')
+            {
+              encryp[z] += 5;
+              if (encryp[z] > 'z')
+              {
+                encryp[z] = encryp[z] - 'z' + 'a' - 1;
+              }
+            }
+
+            else if (encryp[z] >='A' && encryp[z] <= 'Z')
+            {
+              encryp[z] += 5;
+              if (encryp[z] + 5 > 'Z')
+              {
+                if (encryp[z] > 'Z')
+                {
+                  encryp[z] = encryp[z] - 'Z' + 'A' - 1;
+                }
+              }
+            }
+            
+          }
+          //3c
+          pid3 = fork();
+          chdir(".."); //balik ke direktori sebelumnya
+          if (pid3 == 0 )
+          {
+            //for txt
+            strcpy(target, timenow);
+            strcat(target, "/");
+            strcat(target, "status.txt"); //target/status.txt
+            FILE* txt = fopen(target, "w");
+            fputs(encryp, txt);
+            fclose(txt);
+
+            //for zip
+            strcpy(target, timenow);
+            strcat(target, ".zip");
+            
+            char *args[] = {"zip", "-r", target, timenow , NULL};
+            execv("/usr/bin/zip", args);
+          }
+          pid_t pid4;
+          while ((wait(&status3)) > 0); //agar menunggu folder jadi terlebuh dahulu
+          //pid4 = fork();
+          // if (pid4 == 0)
+          // {
+            char *arg[] = {"rm", "-r",timenow, NULL};
+            execv("/usr/bin/rm", arg);
+          // }
+      }
+```
 
 #### Output :
 
