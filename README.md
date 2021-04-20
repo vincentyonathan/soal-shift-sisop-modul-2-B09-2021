@@ -219,7 +219,7 @@ txt :
 - Setelah itu, kembali menggunakan kondisional `if(pid3 == 0)`
 - Didalam kondisional tersebut, dijalankan pertama adalah menggunakan `strcpy` untuk mengisi variable `target` dengan `timenow` yaitu format nama folder pada 3.a). Kemudian melakukan `strcat` agar menambahkan suatu kalimat di bagian belakang `target` yang terisi `timenow` sekarang sebagai direktorinya, yaitu "/" dengan syntax `strcat(target, "/");`
 - Kemudian, agar penamaan sesuai "status.txt" maka direktori `target` tadi harus dilakukan `strcat` lagi untuk ditambahkan `status.txt`.
-- Kemudian mendeklarasikan file dengan variable `txt` agar bisa diakses untuk ditutup yang bertugas membuka `target` yaitu file yang dibuat dan `w` untuk write.
+- Kemudian mendeklarasikan `FILE` dengan variable `txt` agar bisa diakses untuk  membuka `target` yaitu file yang dibuat dan `w` untuk write.
 - Kemudian dilakukan `fputs` untuk mengisi file `txt` yang berbentuk .txt tersebut dengan `encryp` yang berisi statement "Download Success" yang telah terenkripsi.
 
 zip :
@@ -238,6 +238,18 @@ menghapus folder awal :
 *Praktikan* diminta membuat program tersebut akan men-generate sebuah program “Killer” yang executable, dimana program tersebut akan menterminasi semua proses program yang sedang berjalan dan akan menghapus dirinya sendiri setelah program dijalankan menggunakan program bash.
 
 #### Source Code :
+```c
+ //3d --> bash Killer.sh
+    char newdir[50] = "/home/prk/praktikum2/Killer.sh";
+    FILE* killer = fopen(newdir, "w");
+    fprintf(killer , "#!/bin/bash\nkillall ./soal3\n");
+    fclose(killer);
+```
+- Nomor 3.d) ini akan sepaket dengan nomor 3.c) namun disini hanya akan diambil potongan kodenya
+- Pertama akan dideklarasikan variable array `newdir` bertipe data `char` berukuran 50 yang diisi dengan directory dimana akan dibuat program killer ini yaitu `"/home/prk/praktikum2/Killer.sh"`.
+- Kemudian mendeklarasikan `FILE*` dengan variable `killer` agar bisa diakses untuk membuka `newdir` tadi dan `w` untuk write.
+- Selanjutnya, menggunakan syntax `fprintf()` untuk membuka file `killer` dan menuliskan algortima dalam bash untuk killall yaitu `"#!/bin/bash\nkillall ./soal3\n"`
+- Terakhir menggunakan `fclose(killer)` untuk menutup file tersebut.
 
 #### Output :
 
@@ -246,7 +258,8 @@ menghapus folder awal :
 *Praktikan* diminta membuat program utamanya dapat dijalankan di dalam dua mode. Untuk mengaktifkan mode pertama, program harus dijalankan dengan argumen -z, dan Ketika dijalankan dalam mode pertama, program utama akan langsung menghentikan semua operasinya Ketika program Killer dijalankan. Sedangkan untuk mengaktifkan mode kedua, program harus dijalankan dengan argumen -x, dan Ketika dijalankan dalam mode kedua, program utama akan berhenti namun membiarkan proses di setiap direktori yang masih berjalan hingga selesai (Direktori yang sudah dibuat akan mendownload gambar sampai selesai dan membuat file txt, lalu zip dan delete direktori).
 
 #### Source Code :
-
+```c
+```
 #### Output :
 
 
