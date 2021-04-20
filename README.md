@@ -57,7 +57,7 @@ int main(int argc, char *argv[])
 - Berikutnya, menggunakan `strftime` yang *mengassign* variable `timenow` dengan value dari variable `temporary` dengan format yang diminta yaitu `"%Y-%m-%d_%H:%M:%S"`
 - Kemudian menggunakan kondisi `if (pid2 == 0) ` yang menjadi kondisi untuk menjalankan child process telah berhasil dan dapat menjalankan proses berikutnya
 - Lalu kita mendefinisikan `*argv[]` dengan tipe data char yang berisi arguments yang akan digunakan dalam `execv` yaitu disini adalah `{"mkdir", timenow, NULL}`
-- Pada akhirnya, menggunakan `execv` untuk menjalankan program untuk membuat (`directory`) dengan menggunakan directory dari `mkdir` yaitu `"/usr/bin/mkdir"` dan sesuai dengan isi dari variable `timenow` 
+- Pada akhirnya, menggunakan `execv` untuk menjalankan program untuk membuat (`directory`) dengan menggunakan directory dari `mkdir` dengan argumen `"/usr/bin/mkdir"` dan sesuai dengan isi dari variable `timenow` 
 - Lalu `execv` harus diakhiri dengan `NULL` dan program dapat dijalankan. Karena diminta untuk membuat setiap 40 detik, maka menggunakan `sleep(40)` pada akhir while.
 
 #### Output :
@@ -67,8 +67,6 @@ int main(int argc, char *argv[])
 
 #### Source Code :
 ```c
-int main()
-{
 ...
   pid_t temp;
      while ((wait(&stats)) > 0);
@@ -105,7 +103,7 @@ int main()
  ...
 ```
 Tahap Inisialisasi :
-- Pada soal 3 b.) ini, pertama didefinisikan dahulu `pid_t` dengan nama `temp` yang akan menjadi kondisi untuk program dijalankan. 
+- Pada soal 3 b.) ini, pertama dideklarasikan dahulu `pid_t` dengan nama `temp` yang akan menjadi kondisi untuk program dijalankan. 
 - Kemudian memakai ```c while ((wait(&stats)) > 0);``` dimana ini digunakan agar program ini dijalankan menunggu proses sebelumnya selesai terlebih dahulu.
 - Setelah itu melakukan `fork()` yang disimpan ke `temp` seperti proses pada umumnya 
 
@@ -126,8 +124,8 @@ Tahap Soal :
 - Kemudian mendeklarasikan juga variable array `ukuran` dengan tipe data `char` dengan ukuran 10 untuk menampung hasil dari `size` yang merupakan langkah selanjutnya dari code yaitu ` sprintf(ukuran, "%lld", size);`
 - Setelah itu karena link fotonya ternyata dapat diset ukurannya dengan cara menambahkan argumen dibelakang `/`, maka kita melakukan `strcat(sizelink, ukuran);` agar link nya tepat untuk mengunduh foto sesuai ukuran yang diinginkan.
 - Kemudian terakhir mendeklarasikan variable array `dir` bertipe data `char` berukuran 100 dan nantinya akan diisi nama directory `timenow2` untuk nanti `wget` mengetahui harus masuk ke directory mana terlebih dahulu
-- Langkah setelahnya, mendefinisikan `*arguments[]` dengan tipe data char yang berisi arguments yang akan digunakan dalam `execv` yaitu disini adalah `{"wget", "-q", "-O", dir, sizelink ,NULL}`
-- Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan download (`wget -q -O`) dengan menggunakan directory dari `dir` dari link pada `sizelink` yaitu `"/usr/bin/wget"`. 
+- Langkah setelahnya, mendefinisikan `*arguments[]` dengan tipe data `char` yang berisi arguments yang akan digunakan dalam `execv` yaitu disini adalah `{"wget", "-q", "-O", dir, sizelink ,NULL}`
+- Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan download (`wget -q -O`) dengan menggunakan directory dari `dir` dari link pada `sizelink` dan ditambahkan argumen `"/usr/bin/wget"`. 
 
 #### Output :
 
@@ -135,8 +133,11 @@ Tahap Soal :
 Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat sebuah file “status.txt”, dimana didalamnya berisi pesan “Download Success” yang terenkripsi dengan teknik Caesar Cipher dan dengan shift 5. Caesar Cipher adalah Teknik enkripsi sederhana yang dimana dapat melakukan enkripsi string sesuai dengan shift/key yang kita tentukan. Misal huruf “A” akan dienkripsi dengan shift 4 maka akan menjadi “E”. Karena Ranora orangnya perfeksionis dan rapi, dia ingin setelah file tersebut dibuat, direktori akan di zip dan direktori akan didelete, sehingga menyisakan hanya file zip saja.
 
 #### Source Code :
+Caesar Cipher :
+Pada algoritma Caesar Cipher pada soal ini, diminta untuk menambahkan ASCII alphabet yang ada di kata "Download Success" sebanyak 5, karena itu algoritma pada program adalah :
 ```c
- pid_t pid3;
+...
+          pid_t pid3;
           while ((wait(&status2)) > 0); //agar menunggu folder jadi terlebuh dahulu
           char target[50];
           char encryp[50] = "Download Success";
@@ -170,7 +171,18 @@ Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat s
             }
             
           }
-          //3c
+```
+- Pertama, seperti biasanya akan dideklarasikan `pid_t` dengan nama `pid3` yang akan menjadi kondisi untuk program dijalankan. 
+- Kemudian memakai ```c while ((wait(&stats2)) > 0);``` dimana ini digunakan agar program ini dijalankan menunggu proses sebelumnya selesai terlebih dahulu.
+- Setelah itu, mendeklarasikan variable yang dibutuhkan yaitu `target` dan `encryp` yang berbentuk array dan bertipe data `char` dimana `encryp` akan diisikan oleh *statement* yang diminta oleh soal yaitu "Download Success". Kemudian juga dideklarasikan variable `sizet` bertipe data `int` untuk menyimpan panjang dari statement di `encryp` menggunakan fungsi `len(encryp)`.
+- Setelah itu, algoritma Caesar Cipher ini menggunakan looping sehingga mendefinisikan variable looping `z` dan melakukan forloop sebanyak `sizet` atau panjang kalimat pada `encryp`.
+- Setelah itu menjalankan berbagai kondisi yaitu apabila looping pada saat itu adalah *spasi* atau `encryp[z] == ' '`, maka program akan dilanjutkan. Algoritma setelahnya yaitu apabila `encryp[z]` ada dalam batas ASCII 'a' dan 'z', maka akan langsung ditambahkan dengan 5. Namun, apabila tidak maka akan dikembalikan ke batasan ASCII 'a' sampai 'z' menggunakan `encryp[z] = encryp[z] - 'z' + 'a' - 1;`.
+- Begitupula dengan kondisi ketika `encryp[z]` ada dalam batas ASCII 'A' dan 'Z', maka akan langsung ditambahkan dengan 5. Namun, apabila tidak maka akan dikembalikan ke batasan ASCII 'A' sampai 'Z' menggunakan `encryp[z] = encryp[z] - 'Z' + 'A' - 1;`.
+
+Tahap Soal (Txt dan Zipping) :
+
+```c
+ //3c
           pid3 = fork();
           chdir(".."); //balik ke direktori sebelumnya
           if (pid3 == 0 )
@@ -199,8 +211,29 @@ Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat s
             execv("/usr/bin/rm", arg);
           // }
       }
+  ....
 ```
+txt :
+- Pada tahap yang diminta oleh soal yaitu zipping, seperti biasanya akan melakukan `fork()` menggunakan `pid3` yang telah dideklarasikan pada tahap Caesar Cipher diatas.
+- Kemudian menggunakan `chdir(..)` agar tidak terbuat dalam folder yang sama seperti pada gambar pada 3.b).
+- Setelah itu, kembali menggunakan kondisional `if(pid3 == 0)`
+- Didalam kondisional tersebut, dijalankan pertama adalah menggunakan `strcpy` untuk mengisi variable `target` dengan `timenow` yaitu format nama folder pada 3.a). Kemudian melakukan `strcat` agar menambahkan suatu kalimat di bagian belakang `target` yang terisi `timenow` sekarang sebagai direktorinya, yaitu "/" dengan syntax `strcat(target, "/");`
+- Kemudian, agar penamaan sesuai "status.txt" maka direktori `target` tadi harus dilakukan `strcat` lagi untuk ditambahkan `status.txt`.
+- Kemudian mendeklarasikan file dengan variable `txt` agar bisa diakses untuk ditutup yang bertugas membuka `target` yaitu file yang dibuat dan `w` untuk write.
+- Kemudian dilakukan `fputs` untuk mengisi file `txt` yang berbentuk .txt tersebut dengan `encryp` yang berisi statement "Download Success" yang telah terenkripsi.
+
+zip :
+- Untuk zip, tahap pertama yang dilakukan adalah dengan mengisi variable `target` dengan `timenow` dan menambahkan kalimat dibelakangnya menggunakan `strcat`. String tersebut berisi ".zip" sehingga `target` sekarang terisi dengan "(timenow).zip"
+- Kemudian memendefinisikan `*args[]` dengan tipe data `char` yang berisi arguments yang akan digunakan dalam `execv` yaitu disini adalah `{"zip", "-r", target, timenow , NULL}`
+- Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan zip (`zip -r`) dengan argumen `"/usr/bin/zip"`. 
+
+menghapus folder awal :
+- Menggunakan ```c while ((wait(&stats)) > 0);``` dimana ini digunakan agar program ini dijalankan menunggu proses sebelumnya selesai terlebih dahulu yaitu pembentukan zip.
+- Kemudian memendefinisikan `*arg[]` dengan tipe data `char` yang berisi arguments yang akan digunakan dalam `execv` yaitu disini adalah `{"rm", "-r",timenow, NULL}`.
+- Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan remove (`rm -r`) dengan argumen `"/usr/bin/rm"`. 
 
 #### Output :
 
+### 3. d)
+*Praktikan* diminta membuat program tersebut akan men-generate sebuah program “Killer” yang executable, dimana program tersebut akan menterminasi semua proses program yang sedang berjalan dan akan menghapus dirinya sendiri setelah program dijalankan menggunakan program bash.
 
