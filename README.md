@@ -319,7 +319,9 @@ Cara Pengerjaan :
 1. User tidak memasukan argumen               : No Command
 2. Argumen yang diinput lebih dari 1          : Too much command
 3. Argumen yang diinput bukan `-z` atau `-x`  : No such command listed
-Dan program akan langsung batal/keluar.
+
+
+Kemudian program akan langsung batal/keluar.
 
 #### Output :
 
