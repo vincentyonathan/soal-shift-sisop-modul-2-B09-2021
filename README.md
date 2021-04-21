@@ -259,7 +259,68 @@ menghapus folder awal :
 
 #### Source Code :
 ```c
+int main(int argc, char *argv[]) 
+{
+  //3e
+  if (argc != 2)
+  {
+    printf("No Command\n");
+    exit(EXIT_FAILURE);
+  }
+  
+  else if (argc > 2)
+  {
+    printf("Too much command\n");
+    exit(EXIT_FAILURE);
+  }
+
+  else if(argv[1][1]=='z')
+  {
+    //3d --> bash Killer.sh
+    char newdir[50] = "/home/prk/praktikum2/Killer.sh";
+    FILE* killer = fopen(newdir, "w");
+    fprintf(killer , "#!/bin/bash\nkillall ./soal3\n");
+    fclose(killer);
+  }
+
+  else if(argv[1][1]=='x')
+  {
+    //3d --> bash Killer.sh
+    char newdir[50] = "/home/prk/praktikum2/Killer.sh";
+    FILE* killer = fopen(newdir, "w");
+    fprintf(killer , "#!/bin/bash\nkill %d\n",getpid()+1); //pas di main anggap 10, pas fork pertama 11, yang ingin dimatikan yang 11
+    fclose(killer);
+  }
+
+  else
+  {
+    printf("No such command listed\n");
+    exit(EXIT_FAILURE);
+  }
+...
+}
 ```
+- Pada soal 3.e) ini, diminta bahwa program dapat dijalankan yaitu dengan command `./soal1` dengan bisa dengan 2 mode (argumen) yaitu `-x` dan `-z`
+- Pada `./soal1 -z`, maka program juga akan membuat program `bash` dengan nama `Killer.sh` yang isinya meng*kill* atau menterminate semua proses yang sedang berjalan pada terminal. 
+- Sedangkan pada `./soal1 -x`, program diharuskan membuat program `bash` dengan nama `Killer.sh` dimana tugasnya adalah menterminate/ menghentikan semua proses yang sedang berjalan, namun proses download dan zip tetap berjalan sampai zip terakhir terbuat.
+
+Cara Pengerjaan :
+- Karena kita diperlukan untuk mengambil argumen pada input di terminal, maka pada `int main()` ditambahkan `argv` dan `argc` dengan cara `int main(int argc, char *argv[])`.
+- Kemudian karena command yang diinginkan adalah `-x` atau `-z`, maka bisa digunakan array 2 dimensi pada `argv` pada kondisinya dan membandingkan dengan char `z` atau `x`.
+- Pada argumen `-z`, pertama mendeklarasikan variable array `newdir` bertipe data `char` sebesar 50 dan diisi dengan direktori dimana kita akan membuat program `bash` `Killer.sh` tersebut.
+- Kemudian menggunakan `FILE*` mendeklarasikan variable `killer` yang bertugas membuka file pada variable `newdir` tadi dan `w` atau menulis pada file tersebut.
+- Selanjutnya, didalam file tersebut, digunakan `fprintf()` agar bisa ditulis sesuai format dengan argumen file tujuan `killer` dan isi yaitu `"#!/bin/bash\nkillall ./soal3\n"`.
+- Terakhir dilakukan `fclose()`
+- Untuk argumen `-x` juga demikian dimana harus mendeklarasikan variable array `newdir` bertipe data `char` sebesar 50 dan diisi dengan direktori dimana kita akan membuat program `bash` `Killer.sh` tersebut.
+- Kemudian menggunakan `FILE*` mendeklarasikan variable `killer` yang bertugas membuka file pada variable `newdir` tadi dan `w` atau menulis pada file tersebut.
+- Setelah itu menggunakan `fprintf()` tetapi dengan isi yang berbeda yaitu `"#!/bin/bash\nkill %d\n",getpid()+1` dikarenakan yang akan dimatikan adalah id 1 diatas `main`.
+- Kemudian dilakukan `fclose()`
+- Disini juga saya tambahkan apabila user tidak memasukan argumen, memasukan argumen lebih dari 1 dan memasukan argumen yang bukan `-z` dan `-x`. Dimana error yang akan ditampilkan program adalah :
+1. User tidak memasukan argumen               : No Command
+2. Argumen yang diinput lebih dari 1          : Too much command
+3. Argumen yang diinput bukan `-z` atau `-x`  : No such command listed
+Dan program akan langsung batal/keluar.
+
 #### Output :
 
 
