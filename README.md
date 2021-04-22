@@ -326,3 +326,9 @@ Kemudian program akan langsung batal/keluar.
 #### Output :
 
 
+### Kendala yang dialami :
+- Tidak mengetahui cara mendownload foto dengan size, namun akhirnya diketahui ketika membuka link.
+- Kesulitan mencari cara untuk argumen "-x".
+- Belum terbiasa menggunakan daemon
+- Bingung tentang proses program karena terjadi cepat, namun dapat teratasi dengan while(wait())
+
