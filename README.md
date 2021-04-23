@@ -329,7 +329,12 @@ Cara Pengerjaan :
 Kemudian program akan langsung batal/keluar.
 
 #### Output :
+![3d](./screenshot/proofx.JPG)
+![3d](./screenshot/finalx.JPG)
+Pada gambar disini, program masih berjalan hingga zip, setelah itu baru berhenti.
 
+Selain itu juga ditambahkan 3 error diatas dimana
+![3d](./screenshot/error.JPG)
 
 ### Kendala yang dialami :
 - Tidak mengetahui cara mendownload foto dengan size, namun akhirnya diketahui ketika membuka link.
