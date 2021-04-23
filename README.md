@@ -61,6 +61,7 @@ int main(int argc, char *argv[])
 - Lalu `execv` harus diakhiri dengan `NULL` dan program dapat dijalankan. Karena diminta untuk membuat setiap 40 detik, maka menggunakan `sleep(40)` pada akhir while.
 
 #### Output :
+![3a](./screenshots/1.JPG)
 
 #### 3. b)
 *Praktikan* diminta mengisi 10 foto dari https://picsum.photos/ pada folder/direktori setelah setiap direktori pada nomor 3.a) selesai. Setiap gambar tersebut akan didownload dengan selang waktu 5 detik dan akan diberi nama dengan format timestamp [YYYY-mm-dd_HH:ii:ss] dan gambar tersebut berbentuk persegi dengan ukuran (n%1000) + 50 pixel dimana n adalah detik Epoch Unix.
@@ -128,6 +129,7 @@ Tahap Soal :
 - Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan download (`wget -q -O`) dengan menggunakan directory dari `dir` dari link pada `sizelink` dan ditambahkan argumen `"/usr/bin/wget"`. 
 
 #### Output :
+![3b](./screenshots/2.JPG)
 
 ### 3. c)
 Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat sebuah file “status.txt”, dimana didalamnya berisi pesan “Download Success” yang terenkripsi dengan teknik Caesar Cipher dan dengan shift 5. Caesar Cipher adalah Teknik enkripsi sederhana yang dimana dapat melakukan enkripsi string sesuai dengan shift/key yang kita tentukan. Misal huruf “A” akan dienkripsi dengan shift 4 maka akan menjadi “E”. Karena Ranora orangnya perfeksionis dan rapi, dia ingin setelah file tersebut dibuat, direktori akan di zip dan direktori akan didelete, sehingga menyisakan hanya file zip saja.
@@ -233,6 +235,9 @@ menghapus folder awal :
 - Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan remove (`rm -r`) dengan argumen `"/usr/bin/rm"`. 
 
 #### Output :
+![1a](./screenshots/3.JPG)
+![1a](./screenshots/soal1a.JPG)
+![1a](./screenshots/soal1a.JPG)
 
 ### 3. d)
 *Praktikan* diminta membuat program tersebut akan men-generate sebuah program “Killer” yang executable, dimana program tersebut akan menterminasi semua proses program yang sedang berjalan dan akan menghapus dirinya sendiri setelah program dijalankan menggunakan program bash.
