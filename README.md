@@ -16,6 +16,15 @@
 * [Soal 3](#soal-3)
 
 ---
+### Soal 2
+*Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
+#### 2. a)
+#### 2. b)
+#### 2. c)
+#### 2. d)
+#### 2. e)
+#### Kendala yang dialami
+---
 ### Soal 3
 *Praktikan* diminta membantu Ranora dalam membuat tugas magangnya di “FakeKos Corp.” yang bekerja dalam keamanan data. Ranora ditugaskan untuk membuat program untuk tugas pertamanya.
 
