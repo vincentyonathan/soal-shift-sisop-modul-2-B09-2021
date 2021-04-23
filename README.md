@@ -129,7 +129,7 @@ Tahap Soal :
 - Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan download (`wget -q -O`) dengan menggunakan directory dari `dir` dari link pada `sizelink` dan ditambahkan argumen `"/usr/bin/wget"`. 
 
 #### Output :
-![3b](./screenshots/2.JPG)
+![3b](./screenshot/2.JPG)
 
 ### 3. c)
 Setelah direktori telah terisi dengan 10 gambar, program tersebut akan membuat sebuah file “status.txt”, dimana didalamnya berisi pesan “Download Success” yang terenkripsi dengan teknik Caesar Cipher dan dengan shift 5. Caesar Cipher adalah Teknik enkripsi sederhana yang dimana dapat melakukan enkripsi string sesuai dengan shift/key yang kita tentukan. Misal huruf “A” akan dienkripsi dengan shift 4 maka akan menjadi “E”. Karena Ranora orangnya perfeksionis dan rapi, dia ingin setelah file tersebut dibuat, direktori akan di zip dan direktori akan didelete, sehingga menyisakan hanya file zip saja.
@@ -235,9 +235,9 @@ menghapus folder awal :
 - Langkah terakhir adalah menggunakan `execv` untuk menjalankan program untuk melakukan remove (`rm -r`) dengan argumen `"/usr/bin/rm"`. 
 
 #### Output :
-![1a](./screenshots/3.JPG)
-![1a](./screenshots/soal1a.JPG)
-![1a](./screenshots/soal1a.JPG)
+![3c](./screenshot/3.JPG)
+![3c](./screenshot/status.JPG)
+![3c](./screenshot/isistatus.JPG)
 
 ### 3. d)
 *Praktikan* diminta membuat program tersebut akan men-generate sebuah program “Killer” yang executable, dimana program tersebut akan menterminasi semua proses program yang sedang berjalan dan akan menghapus dirinya sendiri setelah program dijalankan menggunakan program bash.
@@ -257,7 +257,7 @@ menghapus folder awal :
 - Terakhir menggunakan `fclose(killer)` untuk menutup file tersebut.
 
 #### Output :
-
+![3d](./screenshot/z.JPG)
 
 ### 3. e)
 *Praktikan* diminta membuat program utamanya dapat dijalankan di dalam dua mode. Untuk mengaktifkan mode pertama, program harus dijalankan dengan argumen -z, dan Ketika dijalankan dalam mode pertama, program utama akan langsung menghentikan semua operasinya Ketika program Killer dijalankan. Sedangkan untuk mengaktifkan mode kedua, program harus dijalankan dengan argumen -x, dan Ketika dijalankan dalam mode kedua, program utama akan berhenti namun membiarkan proses di setiap direktori yang masih berjalan hingga selesai (Direktori yang sudah dibuat akan mendownload gambar sampai selesai dan membuat file txt, lalu zip dan delete direktori).
