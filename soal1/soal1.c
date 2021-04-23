@@ -434,12 +434,19 @@ int main(void) {
     getcwd(currentDir,256);
     pid_t pid, sid;
     int status;
+
     if((pid = fork()) > 0)
         exit(EXIT_SUCCESS);
+
     umask(0);
+
     sid = setsid();
     if (sid < 0 || chdir(currentDir))
         exit(EXIT_FAILURE);
+
+    close(STDIN_FILENO);
+    close(STDOUT_FILENO);
+    close(STDERR_FILENO);
 
     Daemon(&status);
     return 0;
