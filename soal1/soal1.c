@@ -362,7 +362,7 @@ void zipping_folder(void){
         argv[1]= "-m";
         argv[2]= "-r";
         argv[3]= "Lopyu_Stevany.zip";
-        argv[4]= "lopyu_Stevany";
+        argv[4]= "Lopyu_Stevany";
         argv[5]= NULL;
         execv("/bin/zip", argv);
     }
@@ -415,7 +415,7 @@ void Daemon(){
         struct tm *timenow=localtime(&now);
         if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
         its_birthday(pid,status);
-        else if (b_month == timenow->tm_mon && b_day-6 == timenow->tm_mday && b_hour == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
+        else if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour-6 == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
         h_6_birthday(pid);
         while(wait(&status)>0);
         sleep(sleep_time);
