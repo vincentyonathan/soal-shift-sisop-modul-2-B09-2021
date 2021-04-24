@@ -18,11 +18,152 @@
 ---
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
+
 #### 2. a)
+*Praktikan* diminta untuk mengextract *zip* ke dalam folder "/Users/macbook/soal2/petshop" dan dapat membedakan folder dan file yang harus dikerjakan serta menghapus folder-folder yang tidak dibutuhkan.
+
+#### Source Code :
+```c
+...
+void unzip_file()
+{
+    pid_t child_id;
+    int status;
+    child_id = fork();
+
+    if (child_id < 0)
+    {
+        exit(EXIT_FAILURE);
+    }
+
+    if(child_id == 0)
+    {
+        //goal
+        char *New_Folder[] = {"mkdir","-p", "/Users/macbook/soal2/petshop", NULL};
+        executedprogram("/bin/mkdir", New_Folder);
+
+        //source
+        char *Unzip_file[] = {"unzip", "-q", "/Users/macbook/soal2/pets.zip", "-d", "/Users/macbook/soal2/petshop", "*.jpg", NULL};
+        executedprogram("/usr/bin/unzip", Unzip_file);
+    }
+
+    else { while ((wait(&status)) > 0);}
+}
+```
+Pengerjaan program di atas menggunakan proses `fork` x `exec` x `wait` yang dapat menjalankan dua proses dalam suatu program. Dimana pada program di atas membuat suatu folder baru yang bernama *Petshop* dan dibuat di direktori "/Users/macbook/soal2/". Kemudian dibuat sebuah program untuk men-unzip file yang berada di direktori "/Users/macbook/soal2/pets.zip" yang berisikan file-file penting yang akan dimasukkan ke dalam folder baru *petshop* yang telah dibuat dengan menggunakan `-d`, dengan syarat dimana file yang dimasukkan hanya berjenis **.jpg** saja. Lalu setiap program akan dijalankan menggunakan *executedprogram* yang berisikan proses `execv`.
+
 #### 2. b)
-#### 2. c)
-#### 2. d)
+*Praktikan* diminta mengkategorikan semua jenis peliharaan, kemudian membuat folder-folder untuk setiap jenis dari peliharaan yang ada didalam *zip*.
+
+Sebelum melakukan pengecekan pada setiap nama file yang ada didalam folder *Petshop* akan di cut **.jpg** guna untuk memudahkan program dalam pencarian atribut-atribut yang ada dinama file.
+#### Source Code :
+```c
+char* cut_jpg (char*s)
+{
+    int a,b;
+    char* new;
+
+    for (b = 0; s[b] != '\0'; b++);
+
+    // panjang dari string
+    a = b - 4 + 1;
+
+    if (a < 1)return NULL;
+
+    new = (char*) malloc (a * sizeof(char));
+
+    for (b = 0; b < a - 1; b++)new[b] = s[b]; new[b] = '\0'; return new;
+}
+```
+
+Selanjutnya program akan mengecek dan menyimpan setiap urutan string yang ada di nama file-file tersebut :
+#### Source Code :
+```c
+    if(strcmp(dp->d_name, ".") != 0 && strcmp(dp->d_name, "..") != 0)
+                {
+                    char *sign1, *sign2, *sign3, *sign4;
+                    char *namefile = dp -> d_name; char *namefilenew = cut_jpg(namefile);
+
+                    char hasil1[100], hasil2[100]; 
+                    char path2[100], path3[100];
+                    char cat[50], name[50], umur[50];
+   
+               for(sign1 = strtok_r(namefilenew, "_", &sign3); sign1!=NULL; sign1=strtok_r(NULL, "_", &sign3))
+                    {
+                        int x = 0;
+                        char path[100]="/Users/macbook/soal2/petshop/"; 
+                        char tekspath[100], fileket[100], namahewan[100];
+
+                        strcpy(hasil1, namefile); strcpy(hasil2, namefile);
+                        strcpy(path2, path); strcpy(path3, path);
+                        
+                        for(sign2 = strtok_r(sign1, ";", &sign4); sign2 != NULL; sign2 = strtok_r(NULL, ";", &sign4))
+                        {
+                            //nyimpen sesuai dengan atribut
+                            if(x==0){
+                                strcpy(cat, sign2);
+                            }
+                            if(x==1){
+                                strcpy(name, sign2);
+                            }
+                            if(x==2){
+                                strcpy(umur, sign2);
+                            }
+                            x = x + 1;
+                        }
+```
+Pengerjaan pada program di atas menggunakan `strtok_r` dimana berfungsi untuk membaca tanda di dalam string yang terdapat di dalam nama-nama file yang ada di folder *Petshop*, tanda yang akan diketahui dan dibaca oleh program adalah `;` dan `_` (*underscore*). Lalu penginisialisasian variabel-variabel yang akan digunakan dalam proses pencarian. Kemudian program akan melakukan *looping* untuk mengecek setiap file dimana :
+- Jika string di urutan ke 0 atau `if(x==0)` maka atribut tersebut akan disimpan kedalam variabel array **cat** atau categories.
+- Jika string di urutan ke 1 atau `if(x==1)` maka atribut tersebut akan disimpan kedalam variabel array **name**.
+- Jika string di urutan ke 2 atau `if(x==2)` maka atribut tersebut akan disimpan ke dalam variabel array **umur**.
+- `x = x + 1` program akan melakukan **looping** untuk pengecekan.
+
+Proses selanjutnya adalah pembuatan program berdasarkan kategori hewan:
+#### Source Code :
+```c
+                        //nomer 2b
+                        strcat(path, cat);
+                        char *New_Folder[] = {"mkdir", "-p", path, NULL};
+                        executedprogram("/bin/mkdir", New_Folder);
+```
+Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyisipkan dari belakang variabel array **cat** berisikan jenis-jenis hewan kedalam path yaitu "/Users/macbook/soal2/". Lalu program akan membuat suatu folder jenis hewan, `-p` digunakan agar ketika suatu pengecekan jenis hewan terdapat beberapa jenis hewan yang sama maka hanya akan diambil satu kali saja dan program akan dieksekusi menggunakan *executedprogram*.
+
+#### 2. c) & d)
+*Praktikan* diminta untuk memindahkan foto kedalam folder yang sesuai dengan kategori jenisnya dan direname dengan nama peliharaan. Lalu jika terdapat lebih dari satu jenis hewan maka dimasukkan juga kedalam folder setiap kategorinya.
+
+#### Source Code :
+```c
+                        //copy nama hewan biar ga ketambahan .jpg
+                        strcpy(namahewan, name);
+                        
+                        //nomer 2c dan 2d
+                        strcat(name, ".jpg");
+                        strcat(path2, hasil2);
+                        char *copyfolder[] = {"cp", path2, path, NULL};
+                        executedprogram("/bin/cp", copyfolder);
+
+                        //rename nama file
+                        strcpy(tekspath, path);
+                        strcpy(path3, path);strcat(path3, "/");
+                        strcat(path3, hasil2);strcat(path, "/");
+                        strcat(path, name);
+
+                        char *renamefile[] = {"renamefile", path3, path, NULL};
+                        executedprogram("/bin/mv", renamefile);
+```
 #### 2. e)
+*Praktikan* diminta untuk membuat sebuah folder *"Keterangan.txt"* yang berisikan **nama** dan **umur** disetiap folder yang sesuai dengan kategorinya.
+
+#### Source Code :
+```c
+                        strcat(tekspath, "/keterangan.txt"); 
+                        strcpy(fileket, "nama : ");strcat(fileket, namahewan);
+                        strcat(fileket, "\numur : ");strcat(fileket, umur);strcat(fileket, " tahun\n\n");
+
+                        FILE *keterangan = fopen(tekspath, "a"); fputs(fileket, keterangan);
+                        fclose(keterangan);  
+```
+
 #### Kendala yang dialami
 ---
 ### Soal 3
