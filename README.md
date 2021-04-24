@@ -158,6 +158,13 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
                         executedprogram("/bin/mv", renamefile);
 ```
 
+- Pengerjaan pada program diatas  yaitu menyimpan suatu nama pada variabel array baru yaitu **namahewan** untuk menyimpan nama dari hewan sebelum penambahan **.jpg** yang akan digunakan ketika di nomor 2e. 
+- Pengerjaan selanjutnya adalah menyisipkan string dari belakang dengan penambahan **.jpg**.
+- Lalu penyisipan pada path "/Users/macbook/soal2/petshop/[categories]/". 
+- Kemudian program akan copy file ke dalam path yaitu "/Users/macbook/soal2/petshop/" dan dieksekusi menggunakan *executedprogram*.
+- Lalu copy path ke dalam variabel tekspath yang akan digunakan pada nomor 2e.
+- Setelah program berhasil mencopy file-file hewan kedalam folder jenis masing-masing, kemudian program akan merubah nama file sesuai dengan nama hewannya tersebut.
+
 #### Output :
 ![2c](./screenshot/2c.png)
 
@@ -173,6 +180,9 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
                         FILE *keterangan = fopen(tekspath, "a"); fputs(fileket, keterangan);
                         fclose(keterangan);  
 ```
+
+Pengerjaan pada proses diatas adalah penyisipan *"/keterangan.txt"* kedalam variabel tekspath yang berisi dengan direktori path, lalu memasukkan keterangan nama dan umur di dalam file *keterangan.txt*. Setelah itu membuat sebuah FILE pointer keterangan menggunakan `fopen` untuk mengakses file-file yang ada di dalam tekspath dan kemudian dimasukkan kedalam variabel fileket, jika telah selesai pengeaksesan, penggunaan `fclose` maka pengaksesan file di setiap folder akan dihentikan.
+
 #### Output :
 - pertama
 ![2e1](./screenshot/2e1.png)
@@ -180,7 +190,10 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
 - kedua
 ![2e2](./screenshot/2e2.png)
 
-#### Kendala yang dialami
+#### Kendala yang dialami :
+- Jika terjadi kesalahan dalam penempatan fork maka hasil compile program akan mengalami infinite loop.
+- Awal mula kebingungan untuk menggunakan *fopen*.
+
 ---
 ### Soal 3
 *Praktikan* diminta membantu Ranora dalam membuat tugas magangnya di “FakeKos Corp.” yang bekerja dalam keamanan data. Ranora ditugaskan untuk membuat program untuk tugas pertamanya.
