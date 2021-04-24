@@ -52,6 +52,9 @@ void unzip_file()
 ```
 Pengerjaan program di atas menggunakan proses `fork` x `exec` x `wait` yang dapat menjalankan dua proses dalam suatu program. Dimana pada program di atas membuat suatu folder baru yang bernama *Petshop* dan dibuat di direktori "/Users/macbook/soal2/". Kemudian dibuat sebuah program untuk men-unzip file yang berada di direktori "/Users/macbook/soal2/pets.zip" yang berisikan file-file penting yang akan dimasukkan ke dalam folder baru *petshop* yang telah dibuat dengan menggunakan `-d`, dengan syarat dimana file yang dimasukkan hanya berjenis **.jpg** saja. Lalu setiap program akan dijalankan menggunakan *executedprogram* yang berisikan proses `execv`.
 
+#### Output :
+![2a](./screenshot/2a.png)
+
 #### 2. b)
 *Praktikan* diminta mengkategorikan semua jenis peliharaan, kemudian membuat folder-folder untuk setiap jenis dari peliharaan yang ada didalam *zip*.
 
@@ -128,6 +131,9 @@ Proses selanjutnya adalah pembuatan program berdasarkan kategori hewan:
 ```
 Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyisipkan dari belakang variabel array **cat** berisikan jenis-jenis hewan kedalam path yaitu "/Users/macbook/soal2/". Lalu program akan membuat suatu folder jenis hewan, `-p` digunakan agar ketika suatu pengecekan jenis hewan terdapat beberapa jenis hewan yang sama maka hanya akan diambil satu kali saja dan program akan dieksekusi menggunakan *executedprogram*.
 
+#### Output :
+![2b](./screenshot/2b.png)
+
 #### 2. c) & d)
 *Praktikan* diminta untuk memindahkan foto kedalam folder yang sesuai dengan kategori jenisnya dan direname dengan nama peliharaan. Lalu jika terdapat lebih dari satu jenis hewan maka dimasukkan juga kedalam folder setiap kategorinya.
 
@@ -151,6 +157,9 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
                         char *renamefile[] = {"renamefile", path3, path, NULL};
                         executedprogram("/bin/mv", renamefile);
 ```
+
+#### Output :
+
 #### 2. e)
 *Praktikan* diminta untuk membuat sebuah folder *"Keterangan.txt"* yang berisikan **nama** dan **umur** disetiap folder yang sesuai dengan kategorinya.
 
@@ -163,6 +172,7 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
                         FILE *keterangan = fopen(tekspath, "a"); fputs(fileket, keterangan);
                         fclose(keterangan);  
 ```
+#### Output :
 
 #### Kendala yang dialami
 ---
