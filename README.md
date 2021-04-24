@@ -159,6 +159,7 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
 ```
 
 #### Output :
+![2c](./screenshot/2c.png)
 
 #### 2. e)
 *Praktikan* diminta untuk membuat sebuah folder *"Keterangan.txt"* yang berisikan **nama** dan **umur** disetiap folder yang sesuai dengan kategorinya.
@@ -173,6 +174,11 @@ Pengerjaan pada program di atas adalah penggunaan `strcat` yang guna untuk menyi
                         fclose(keterangan);  
 ```
 #### Output :
+- pertama
+![2e1](./screenshot/2e1.png)
+
+- kedua
+![2e2](./screenshot/2e2.png)
 
 #### Kendala yang dialami
 ---
