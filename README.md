@@ -386,6 +386,7 @@ Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan se
 #### Output :
 ![1e](./screenshot/1e.PNG)
 
+---
 
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
