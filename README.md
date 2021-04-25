@@ -16,6 +16,64 @@
 * [Soal 3](#soal-3)
 
 ---
+### Soal 1
+*Praktikan* diminta untuk membantu Steven untuk menyiapkan hadiah untuk ulang tahun Stevany dengan mendownload foto, film dan musik lalu dimasukkan kedalam zip dengan urutan dan waktu yang ditentukan.
+
+#### 1.a)
+*Praktikan* diminta untuk membuat folder dengan nama Musyik untuk mp3, Fylm untuk mp4, dan Pyoto untuk jpg.
+
+#### Source Code :
+```c
+void do_makedir_foto(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *argv[16];
+        argv[0] = "mkdir";
+        argv[1] = "-p";
+        argv[2] = "Pyoto";
+        argv[3] = NULL;
+        execv("/bin/mkdir", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_makedir_musik(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *argv[16];
+        argv[0] = "mkdir";
+        argv[1] = "-p";
+        argv[2] = "Musyik";
+        argv[3] = NULL;
+        execv("/bin/mkdir", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_makedir_film(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *argv[16];
+        argv[0] = "mkdir";
+        argv[1] = "-p";
+        argv[2] = "Fylm";
+        argv[3] = NULL;
+        execv("/bin/mkdir", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+```
+Program akan menggunakan proses fork, exec, dan wait, untuk menjalankan proses yang akan melakukan `mkdir` untuk membuat sebuah folder, `-p` untuk membuat parent directory jika dibutuhkan, lalu diisi dengan nama folder seperti `Fylm`, `Pyoto`, dan `Myusik` sesuai dengan kebutuhan, lalu ditutup dengan `NULL`.
+#### Output :
+![1a](./screenshot/1a.png)
+
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
 
@@ -50,6 +108,8 @@ void unzip_file()
     else { while ((wait(&status)) > 0);}
 }
 ```
+
+
 Pengerjaan program di atas menggunakan proses `fork` x `exec` x `wait` yang dapat menjalankan dua proses dalam suatu program. Dimana pada program di atas membuat suatu folder baru yang bernama *Petshop* dan dibuat di direktori "/Users/macbook/soal2/". Kemudian dibuat sebuah program untuk men-unzip file yang berada di direktori "/Users/macbook/soal2/pets.zip" yang berisikan file-file penting yang akan dimasukkan ke dalam folder baru *petshop* yang telah dibuat dengan menggunakan `-d`, dengan syarat dimana file yang dimasukkan hanya berjenis **.jpg** saja. Lalu setiap program akan dijalankan menggunakan *executedprogram* yang berisikan proses `execv`.
 
 #### Output :
