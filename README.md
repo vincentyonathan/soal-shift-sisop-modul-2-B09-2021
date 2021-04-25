@@ -386,6 +386,10 @@ Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan se
 #### Output :
 ![1e](./screenshot/1e.PNG)
 
+#### Kendala yang dialami :
+- Program berjalan namun bukan berupa daemon
+- Sebelum revisi, program dapat berjalan jika dieksekusi manual tetapi tidak berjalan jika diminta dieksekusi pada waktu yang di minta
+
 ---
 
 ### Soal 2
