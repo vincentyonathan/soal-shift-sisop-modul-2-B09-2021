@@ -252,7 +252,7 @@ Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan pr
 ![1b](./screenshot/1b.PNG)
 
 #### 1. e)
-*Praktikan* diminta untuk membuat program berjalan pada waktu yang diminta.
+*Praktikan* diminta untuk membuat program berjalan pada tanggal 9 April pukul 16.22 WIB.
 ```c
 void Daemon(){
     pid_t pid;
@@ -275,6 +275,116 @@ void Daemon(){
     }
 }
 ```
+*Penjelasan ini juga termasuk sebagian dari yang diminta dari 1f*
+Program akan mengecek waktu sekarang lalu dibandingkan dengan variabel waktu yang telah ditentukan. Pada 1e, program akan mengecek apakah tanggal sudah benar, dengan waktu 16.22. Apabila sudah benar, maka program akan menjalankan fungsi `h_6_birthday(pid)` yang berisikan program 1a sampai dengan 1d. Pada 1f, apabila waktu telah menunjukkan tanggal yang benar dengan waktu 22.22 maka program akan menjalankan `its_birthday(pid,status)` yang isinya akan dijelaskan sebagi berikut.
+
+#### 1. f)
+*Praktikan* akan diminta untuk memasukkan folder yang telah ditentukan kedalam zip yang bernama `Lopyu_Stevany.zip` lalu menghapus semua folder (menyisakan zip) lalu program akan berjalan pada 9 April 22.22
+
+#### Source Code :
+```c
+void do_makedir_lopyu_stevany(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *argv[16];
+        argv[0] = "mkdir";
+        argv[1] = "-p";
+        argv[2] = "lopyu_stevany";
+        argv[3] = NULL;
+        execv("/bin/mkdir", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_move_filmlop(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "Fylm";
+    argv[3]= "Lopyu_Stevany";
+    argv[4]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_move_fotolop(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "Pyoto";
+    argv[3]= "Lopyu_Stevany";
+    argv[4]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_move_musiklop(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "Musyik";
+    argv[3]= "Lopyu_Stevany";
+    argv[4]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void move_to_folder(void){
+    do_makedir_lopyu_stevany();
+    do_move_fotolop();
+    do_move_filmlop();
+    do_move_musiklop();
+}
+void zipping_folder(void){
+    pid_t pid = fork();
+    if (pid == 0){
+        char *argv[16];
+        argv[0]= "zip";
+        argv[1]= "-m";
+        argv[2]= "-r";
+        argv[3]= "Lopyu_Stevany.zip";
+        argv[4]= "Lopyu_Stevany";
+        argv[5]= NULL;
+        execv("/bin/zip", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }    
+} 
+void its_birthday(){
+    pid_t pid = fork();
+    if (pid == 0){
+        move_to_folder();
+        zipping_folder();
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }    
+}  
+```
+Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan serangkaian proses yang akan melakukan `mkdir`, `mv`, dan `zip`. Pertama, program akan membuat folder bernama `lopyu_stevany`, lalu program akan memindahkan folder `Fylm`, `Musyik`, dan `Pyoto` kedalam `lopyu_stevany`, lalu folder `lopyu_stevany` dipindahkan kedalam `lopyu_stevany.zip`, menyisakan zip yang didownload dan `lopyu_stevany.zip`. Program akan berjalan dengan fungsi bernama `its_birthday()` yang akan dipanggil pada waktu yang ditentukan oleh 1e.
+
+#### Output :
+![1e](./screenshot/1e.PNG)
 
 
 ### Soal 2
