@@ -134,9 +134,148 @@ void do_download_film(void) {
 Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan proses yang akan melakukan `wget`. disini `wget` akan mendownload melalui link link yang sudah disediakan setelah melakukukan `--no-check-certificate` untuk menskip pengecekan server certificate, `-o` untuk merubah output dari zip menjadi nama yang ditentukan seperti `Film_for_Stevany.zip`, `Foto_for_Stevany.zip`, dan `Musik_for_Stevany.zip`.
 
 #### Output :
-![1a](./screenshot/1a.PNG)
+![1b](./screenshot/1b.PNG)
 
 #### 1. c)
+*Praktikan* diminta untuk mengextract file yang telah di download
+
+#### Source Code :
+```c
+void do_unzip_foto(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "unzip";
+    argv[1]= "-qq";
+    argv[2]= "Foto_for_Stevany.zip";
+    argv[3]= NULL;
+    execv("/bin/unzip", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_unzip_musik(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "unzip";
+    argv[1]= "-qq";
+    argv[2]= "Musik_for_Stevany.zip";
+    argv[3]= NULL;
+    execv("/bin/unzip", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_unzip_film(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "unzip";
+    argv[1]= "-qq";
+    argv[2]= "Film_for_Stevany.zip";
+    argv[3]= NULL;
+    execv("/bin/unzip", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+```
+Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan proses yang akan melakukan `unzip`. `-q` digunakan untuk menekan pesan yang masuk kedalam terminal lalu file akan diberi nama sesuai dengan format yaitu `Film_for_Stevany.zip`, `Foto_for_Stevany.zip`, dan `Musik_for_Stevany.zip`.
+
+#### Output :
+![1c](./screenshot/1c.PNG)
+
+#### 1. d)
+*Praktikan* diminta untuk memasukkan file yang telah diextract ke dalam folder yang bersesuaian.
+
+#### Source Code :
+```c
+void do_move_foto(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "FOTO";
+    argv[3]= "Pyoto";
+    argv[5]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_move_musik(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "MUSIK";
+    argv[3]= "Musyik";
+    argv[5]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_move_film(void){
+    pid_t pid = fork();
+    if (pid == 0){
+    char *argv[16];
+    argv[0]= "mv";
+    argv[1]= "-v";
+    argv[2]= "FILM";
+    argv[3]= "Fylm";
+    argv[4]= NULL;
+    execv("/bin/mv", argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+```
+Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan proses yang akan melakukan `mv`. `-v` hanya berfungsi sebagai bentuk info bahwa file sedang dipindahkan. lalu tempat dan tujuan dari pemindahan ditetapkan.
+
+#### Output :
+![1b](./screenshot/1b.PNG)
+
+#### 1. e)
+*Praktikan* diminta untuk membuat program berjalan pada waktu yang diminta.
+```c
+void Daemon(){
+    pid_t pid;
+    int status;
+    const unsigned sleep_time = 1;
+    const int b_month = 3;
+    const int b_day = 9;
+    const int b_hour = 22;
+    const int b_min = 22;
+    while(1)
+    {
+        time_t now = time(NULL);
+        struct tm *timenow=localtime(&now);
+        if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
+        its_birthday(pid,status);
+        else if (b_month == timenow->tm_mon && b_day == timenow->tm_mday && b_hour-6 == timenow->tm_hour&&b_min==timenow->tm_min&& timenow->tm_sec==0)
+        h_6_birthday(pid);
+        while(wait(&status)>0);
+        sleep(sleep_time);
+    }
+}
+```
+
 
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
