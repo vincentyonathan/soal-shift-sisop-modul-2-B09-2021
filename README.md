@@ -70,9 +70,73 @@ void do_makedir_film(void) {
     }
 }
 ```
-Program akan menggunakan proses fork, exec, dan wait, untuk menjalankan proses yang akan melakukan `mkdir` untuk membuat sebuah folder, `-p` untuk membuat parent directory jika dibutuhkan, lalu diisi dengan nama folder seperti `Fylm`, `Pyoto`, dan `Myusik` sesuai dengan kebutuhan, lalu ditutup dengan `NULL`.
+Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan proses yang akan melakukan `mkdir` untuk membuat sebuah folder, `-p` untuk membuat parent directory jika dibutuhkan, lalu diisi dengan nama folder seperti `Fylm`, `Pyoto`, dan `Myusik` sesuai dengan kebutuhan, lalu ditutup dengan `NULL`.
 #### Output :
 ![1a](./screenshot/1a.PNG)
+
+#### 1. b)
+*Pratikan* diminta untuk mendownload foto, film, dan musik dari link yang sudah disediakan
+
+#### Source Code :
+```c
+void do_download_foto(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *wget_argv[16];
+        wget_argv[0] = "wget";
+        wget_argv[1] = "--no-check-certificate";
+        wget_argv[2] = "-O";
+        wget_argv[3] = "Foto_for_Stevany.zip";
+        wget_argv[4] = "https://drive.google.com/uc?id=1FsrAzb9B5ixooGUs0dGiBr-rC7TS9wTD&export=download";
+        wget_argv[5] = NULL;
+        execv("/bin/wget", wget_argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_download_musik(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *wget_argv[16];
+        wget_argv[0] = "wget";
+        wget_argv[1] = "--no-check-certificate";
+        wget_argv[2] = "-O";
+        wget_argv[3] = "Musik_for_Stevany.zip";
+        wget_argv[4] = "https://drive.google.com/uc?id=1ZG8nRBRPquhYXq_sISdsVcXx5VdEgi-J&export=download";
+        wget_argv[5] = NULL;
+        execv("/bin/wget", wget_argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+void do_download_film(void) {
+    pid_t pid = fork();
+    if (pid == 0){
+        char *wget_argv[16];
+        wget_argv[0] = "wget";
+        wget_argv[1] = "--no-check-certificate";
+        wget_argv[2] = "-O";
+        wget_argv[3] = "Film_for_Stevany.zip";
+        wget_argv[4] = "https://drive.google.com/uc?id=1ktjGgDkL0nNpY-vT7rT7O6ZI47Ke9xcp&export=download";
+        wget_argv[5] = NULL;
+        execv("/bin/wget", wget_argv);
+    }
+    else {
+        int status;
+        waitpid(pid, &status, 0);
+    }
+}
+```
+Program akan menggunakan proses `fork`, `exec`, dan `wait`, untuk menjalankan proses yang akan melakukan `wget`. disini `wget` akan mendownload melalui link link yang sudah disediakan setelah melakukukan `--no-check-certificate` untuk menskip pengecekan server certificate, `-o` untuk merubah output dari zip menjadi nama yang ditentukan seperti `Film_for_Stevany.zip`, `Foto_for_Stevany.zip`, dan `Musik_for_Stevany.zip`.
+
+#### Output :
+![1a](./screenshot/1a.PNG)
+
+#### 1. c)
 
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
