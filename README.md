@@ -72,7 +72,7 @@ void do_makedir_film(void) {
 ```
 Program akan menggunakan proses fork, exec, dan wait, untuk menjalankan proses yang akan melakukan `mkdir` untuk membuat sebuah folder, `-p` untuk membuat parent directory jika dibutuhkan, lalu diisi dengan nama folder seperti `Fylm`, `Pyoto`, dan `Myusik` sesuai dengan kebutuhan, lalu ditutup dengan `NULL`.
 #### Output :
-![1a](./screenshot/1a.png)
+![1a](./screenshot/1a.PNG)
 
 ### Soal 2
 *Praktikan* diminta membantu loba yang bekerja di sebuah "petshop" terkenal, dia mendapatkan *zip* yang berisikan banyak sekali foto peliharaan dan ia diperintahkan untuk mengkategorikan foto-foto peliharaan tersebut dan mencatat daftar **nama** dan **umur** hewan sesuai dengan kategorinya di file *"keterangan.txt"*.
